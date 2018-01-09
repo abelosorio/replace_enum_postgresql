@@ -91,7 +91,7 @@ export function createEnum(args) {
  * @return {String}
  */
 export function getQueryToCreateEnum(name, values) {
-  return `CREATE TYPE ${name} AS ENUM ('${values.join('\', \'')}')`;
+  return `CREATE TYPE "${name}" AS ENUM ('${values.join('\', \'')}')`;
 }
 
 /**
@@ -121,7 +121,7 @@ export function unsetDefaultValueFromEnum(args) {
  * @return {String}
  */
 export function getQueryToRemoveDefaultFromColumn(tableName, columnName) {
-  return `ALTER TABLE ${tableName} ALTER COLUMN ${columnName} DROP DEFAULT`;
+  return `ALTER TABLE "${tableName}" ALTER COLUMN "${columnName}" DROP DEFAULT`;
 }
 
 /**
@@ -153,10 +153,10 @@ export function setColumnTypeToEnum(args) {
  */
 export function getQueryToSetEnumType(tableName, columnName, enumName) {
   return `
-    ALTER TABLE ${tableName}
-      ALTER COLUMN ${columnName}
-        TYPE ${enumName}
-        USING (${columnName}::text::${enumName})
+    ALTER TABLE "${tableName}"
+      ALTER COLUMN "${columnName}"
+        TYPE "${enumName}"
+        USING ("${columnName}"::text::"${enumName}")
   `;
 }
 
@@ -185,7 +185,7 @@ export function dropEnum(args) {
  * @return {String}
  */
 export function getQueryToDropEnum(enumName) {
-  return `DROP TYPE ${enumName}`;
+  return `DROP TYPE "${enumName}"`;
 }
 
 /**
@@ -215,7 +215,7 @@ export function renameEnum(args) {
  * @return {String}
  */
 export function getQueryToRenameEnum(oldEnumName, newEnumName) {
-  return `ALTER TYPE ${oldEnumName} RENAME TO ${newEnumName} `;
+  return `ALTER TYPE "${oldEnumName}" RENAME TO "${newEnumName}"`;
 }
 
 /**
@@ -255,8 +255,8 @@ export function setColumnDefault(args) {
  */
 export function getQueryToSetColumnDefault(tableName, columnName, defaultValue, defaultValueType) {
   return `
-    ALTER TABLE ${tableName}
-      ALTER COLUMN ${columnName}
+    ALTER TABLE "${tableName}"
+      ALTER COLUMN "${columnName}"
         SET DEFAULT '${defaultValue}'::${defaultValueType}
   `;
 }
