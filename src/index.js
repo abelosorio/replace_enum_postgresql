@@ -45,7 +45,7 @@ export default (args) => {
         sequelizeOptions
       }))
       // Drop old ENUM
-      .then(() => dropEnum({ enumName, sequelizeOptions }))
+      .then(() => dropEnum({ enumName, sequelizeOptions, queryInterface }))
       // Rename new ENUM name
       .then(() => renameEnum({
         oldEnumName: newEnumName,
